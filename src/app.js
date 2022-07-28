@@ -1,7 +1,7 @@
 //We take some variables
 const section = document.querySelector('section');
 const playerLivesCount = document.querySelector('span');
-const playerLives = 6;
+let playerLives = 3;
 
 //Link text
 playerLivesCount.textContent = playerLives;
@@ -77,7 +77,7 @@ const checkCards = (e) => {
             flippedCards.forEach(card => {
                 card.classList.remove('flipped');
                 card.style.pointerEvents = 'none';
-            })
+            });
         } else {
             console.log('wrong');
             flippedCards.forEach(card => {
@@ -93,14 +93,24 @@ const checkCards = (e) => {
         }
     }
 };
+
 //Restart
 const restart = () => {
     let cardData = randomize();
     let faces = document.querySelectorAll('.face');
-    let cardData = document.querySelectorAll('.card');
+    let cards = document.querySelectorAll('.card');
     cardData.forEach((item, index) => {
         cards[index].classList.remove('toggleCard');
+        //Radomize
+        setTimeout (() => {
+            cards[index].style.pointerEvents = 'all';
+        faces[index].src = item.imgSrc;
+        cards[index].setAttribute('name', item.name);
+    }, 1000);
     });
+    playerLives = 3;
+    playerLivesCount.textContent = playerLives;
+
 };
 
 cardGenerator();
